@@ -52,6 +52,9 @@ public class MainBakeAdapter extends RecyclerView.Adapter<MainBakeAdapter.BakeVi
 
     @Override
     public int getItemCount() {
+        if (bakeArrayList==null){
+            return 0;
+        }
         return bakeArrayList.size();
     }
     class BakeViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{

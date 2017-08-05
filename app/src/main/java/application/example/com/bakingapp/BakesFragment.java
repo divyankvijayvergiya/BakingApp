@@ -1,6 +1,7 @@
 package application.example.com.bakingapp;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -52,6 +53,9 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
 
     @Override
     public void onListItemClick(int clickItemIndex) {
+        Intent intent=new Intent(getActivity(),StepsIngredientsActivity.class);
+        intent.putExtra("items",clickItemIndex);
+        startActivity(intent);
 
 
     }
