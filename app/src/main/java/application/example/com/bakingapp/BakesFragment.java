@@ -89,7 +89,7 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
             if (params.length == 0) {
                 return null;
             }
-            bakingInfoUrl = params[0];
+
             try {
                 URL url = new URL(bakingInfoUrl);
                 String response = NetworkUtils.makeHttpRequest(url);
@@ -113,6 +113,7 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
 
             setData(bakes);
             bakeArrayList=bakes;
+            super.onPostExecute(bakes);
 
 
 
