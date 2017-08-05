@@ -73,7 +73,9 @@ public class MainBakeAdapter extends RecyclerView.Adapter<MainBakeAdapter.BakeVi
         void onBind(int position) {
 
             if (!bakeArrayList.isEmpty()) {
-                Picasso.with(itemView.getContext()).load(bakeArrayList.get(position).getImages()).into(imageIcon);
+                if(!bakeArrayList.get(position).getImages().isEmpty()) {
+                    Picasso.with(itemView.getContext()).load(bakeArrayList.get(position).getImages()).placeholder(R.drawable.download).into(imageIcon);
+                }
                 name.setText(bakeArrayList.get(position).getName());
                 servings.setText(itemView.getContext().getString(R.string.servings) + " " + bakeArrayList.get(position).getServings());
             }

@@ -85,7 +85,7 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
 
         @Override
         protected ArrayList<Bake> doInBackground(Void... params) {
-            
+
 
 
             try {
