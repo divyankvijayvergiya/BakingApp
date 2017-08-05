@@ -76,19 +76,19 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
     }
 
 
-    public class FetchBakingTask extends AsyncTask<String, Void, ArrayList<Bake>> {
+    public class FetchBakingTask extends AsyncTask<Void, Void, ArrayList<Bake>> {
         public String bakingInfoUrl = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
-
         public FetchBakingTask(Activity activity) {
 
         }
 
 
         @Override
-        protected ArrayList<Bake> doInBackground(String... params) {
+        protected ArrayList<Bake> doInBackground(Void... params) {
             if (params.length == 0) {
                 return null;
             }
+
 
             try {
                 URL url = new URL(bakingInfoUrl);
