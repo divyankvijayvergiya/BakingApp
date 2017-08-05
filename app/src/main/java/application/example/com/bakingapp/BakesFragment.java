@@ -1,6 +1,7 @@
 package application.example.com.bakingapp;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
     private ArrayList<Bake> bakeArrayList = new ArrayList<>();
     private RecyclerView recyclerView;
     private MainBakeAdapter mAdapter;
+
 
 
     public BakesFragment() {
@@ -78,10 +80,17 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
 
     public class FetchBakingTask extends AsyncTask<Void, Void, ArrayList<Bake>> {
         public String bakingInfoUrl = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
+        private ProgressDialog dialog;
         public FetchBakingTask(Activity activity) {
+            dialog = new ProgressDialog(activity);
 
         }
 
+        @Override
+        protected void onPreExecute() {
+            dialog.setMessage("Please wait...");
+            dialog.show();
+        }
 
         @Override
         protected ArrayList<Bake> doInBackground(Void... params) {
@@ -107,7 +116,13 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
         }
 
         @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
         protected void onPostExecute(ArrayList<Bake> bakes) {
+            dialog.dismiss();
 
             setData(bakes);
             bakeArrayList=bakes;
