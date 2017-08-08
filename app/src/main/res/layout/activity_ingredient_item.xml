@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Ingredients"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:id="@+id/ingredients"
+        android:padding="4dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Quantity: "
+            android:textSize="20sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="50"
+            android:id="@+id/quantity_number"
+            android:textSize="20sp"
+            android:padding="4dp"
+            android:layout_marginLeft="2dp"
+            android:textColor="@android:color/holo_orange_dark"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="G"
+            android:id="@+id/measure"
+            android:textSize="20sp"
+            android:padding="4dp"
+            android:layout_marginLeft="1dp"
+            android:textColor="@android:color/holo_orange_dark"
+            />
+    </LinearLayout>
+
+</LinearLayout>

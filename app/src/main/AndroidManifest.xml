@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".StepsIngredientsActivity"></activity>
+        <activity android:name="StepsIngredientsActivity"
+            android:label="@string/steps_activity"></activity>
     </application>
 
 </manifest>

@@ -1,4 +1,4 @@
-package application.example.com.bakingapp;
+package application.example.com.bakingapp.Fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -25,6 +25,9 @@ import java.util.ArrayList;
 
 import application.example.com.bakingapp.Adapter.MainBakeAdapter;
 import application.example.com.bakingapp.Model.Bake;
+import application.example.com.bakingapp.NetworkUtils;
+import application.example.com.bakingapp.R;
+import application.example.com.bakingapp.StepsIngredientsActivity;
 
 import static application.example.com.bakingapp.MainActivity.isTablet;
 
@@ -34,7 +37,7 @@ import static application.example.com.bakingapp.MainActivity.isTablet;
 
 public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemClickListener {
     private static final String TAG = BakesFragment.class.getSimpleName();
-    private ArrayList<Bake> bakeArrayList = new ArrayList<>();
+    public static  ArrayList<Bake> bakeArrayList = new ArrayList<>();
     private RecyclerView recyclerView;
     private MainBakeAdapter mAdapter;
 

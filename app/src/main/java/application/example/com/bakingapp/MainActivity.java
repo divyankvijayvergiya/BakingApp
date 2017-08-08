@@ -4,6 +4,8 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import application.example.com.bakingapp.Fragments.BakesFragment;
+
 public class MainActivity extends AppCompatActivity {
     public static boolean isTablet = false;
     @Override
