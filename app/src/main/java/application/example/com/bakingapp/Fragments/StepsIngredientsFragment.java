@@ -72,6 +72,7 @@ public class StepsIngredientsFragment extends Fragment implements StepsAdapter.L
         } else {
             FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
             StepsDetailActivityFragment stepsDetailActivityFragment = new StepsDetailActivityFragment();
+            stepsDetailActivityFragment.index=clickItemIndex;
             fragmentManager.beginTransaction()
                     .replace(R.id.steps_detail_frame, stepsDetailActivityFragment)
                     .commit();
