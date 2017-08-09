@@ -80,7 +80,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepViewHold
             if(!stepsArrayList.isEmpty()){
                 if (!stepsArrayList.get(position).getThumbnailUrl().isEmpty()){
                     Picasso.with(itemView.getContext()).load(stepsArrayList.get(position).getThumbnailUrl())
-                            .placeholder(R.drawable.download).error(R.drawable.download).into(icon);
+                            .placeholder(R.drawable.video).into(icon);
                 }
                 else {
                     icon.setImageResource(R.drawable.video);

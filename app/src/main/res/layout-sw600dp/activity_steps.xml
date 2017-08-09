@@ -9,7 +9,9 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:id="@+id/steps_list"></FrameLayout>
+        android:id="@+id/steps_list"
+        android:background="#FFEECB"
+        ></FrameLayout>
     <View
         android:layout_width="1dp"
         android:layout_height="match_parent"
@@ -18,7 +20,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:id="@+id/steps_detail"></FrameLayout>
+        android:id="@+id/steps_detail_frame"></FrameLayout>
 
 
 </LinearLayout>

@@ -17,7 +17,7 @@ import application.example.com.bakingapp.Adapter.StepsAdapter;
 import application.example.com.bakingapp.Model.Ingredients;
 import application.example.com.bakingapp.Model.Steps;
 import application.example.com.bakingapp.R;
-import application.example.com.bakingapp.stepsDetailActivity;
+import application.example.com.bakingapp.StepsDetailActivity;
 
 import static application.example.com.bakingapp.Fragments.BakesFragment.bakeArrayList;
 import static application.example.com.bakingapp.MainActivity.isTablet;
@@ -31,7 +31,7 @@ public class StepsIngredientsFragment extends Fragment implements StepsAdapter.L
     private RecyclerView ingredientsRecyclerView;
     private StepsAdapter mStepsAdapter;
     private IngredientsAdapter mIngredientsAdapter;
-    private ArrayList<Steps> stepsArrayList;
+    public static ArrayList<Steps> stepsArrayList;
     private ArrayList<Ingredients> ingredientsArrayList;
     private int index = 0;
 
@@ -64,11 +64,12 @@ public class StepsIngredientsFragment extends Fragment implements StepsAdapter.L
     @Override
     public void onItemClick(int clickItemIndex) {
         if(!isTablet){
-            Intent intent=new Intent(getActivity(),stepsDetailActivity.class);
+            Intent intent=new Intent(getActivity(),StepsDetailActivity.class);
             intent.putExtra("item",clickItemIndex);
             startActivity(intent);
 
         }else {
+
 
 
         }
