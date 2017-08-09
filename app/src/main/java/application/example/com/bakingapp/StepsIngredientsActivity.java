@@ -5,6 +5,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 
+import application.example.com.bakingapp.Fragments.StepsDetailActivityFragment;
 import application.example.com.bakingapp.Fragments.StepsIngredientsFragment;
 
 import static application.example.com.bakingapp.MainActivity.isTablet;
@@ -25,11 +26,16 @@ public class StepsIngredientsActivity extends AppCompatActivity {
                 fragmentManager.beginTransaction()
                         .replace(R.id.steps_list, stepsIngredientsFragment)
                         .commit();
+                StepsDetailActivityFragment stepsDetailActivityFragment=new StepsDetailActivityFragment();
+                fragmentManager.beginTransaction()
+                        .replace(R.id.steps_detail_frame , stepsDetailActivityFragment)
+                        .commit();
+
 
             } else {
                 StepsIngredientsFragment stepsIngredientsFragment = new StepsIngredientsFragment();
                 fragmentManager.beginTransaction()
-                        .replace(R.id.steps_list, stepsIngredientsFragment)
+                        .add(R.id.steps_list, stepsIngredientsFragment)
                         .commit();
             }
         }

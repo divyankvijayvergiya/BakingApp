@@ -77,6 +77,18 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
             prev.setVisibility(View.GONE);
             next.setVisibility(View.GONE);
         }
+        prev.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        next.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
 
         return rootView;
@@ -132,7 +144,25 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         mSimpleExoPlayer.release();
         mSimpleExoPlayer = null;
     }
+    @Override
+    public void onPause() {
+        super.onPause();
+        mSimpleExoPlayer.setPlayWhenReady(false);
+        mMediaSession.setActive(false);
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mMediaSession.setActive(true);
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        releasePlayer();
+        mMediaSession.setActive(false);
+    }
 
     private class MySessionCallBack extends MediaSessionCompat.Callback {
         @Override

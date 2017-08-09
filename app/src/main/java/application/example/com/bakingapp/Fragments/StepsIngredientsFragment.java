@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -63,13 +64,17 @@ public class StepsIngredientsFragment extends Fragment implements StepsAdapter.L
 
     @Override
     public void onItemClick(int clickItemIndex) {
-        if(!isTablet){
-            Intent intent=new Intent(getActivity(),StepsDetailActivity.class);
-            intent.putExtra("item",clickItemIndex);
+        if (!isTablet) {
+            Intent intent = new Intent(getActivity(), StepsDetailActivity.class);
+            intent.putExtra("item", clickItemIndex);
             startActivity(intent);
 
-        }else {
-
+        } else {
+            FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+            StepsDetailActivityFragment stepsDetailActivityFragment = new StepsDetailActivityFragment();
+            fragmentManager.beginTransaction()
+                    .replace(R.id.steps_detail_frame, stepsDetailActivityFragment)
+                    .commit();
 
 
         }
