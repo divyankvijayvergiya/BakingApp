@@ -16,17 +16,19 @@ public class Steps implements Parcelable {
     private String description;
     public String videoUrl;
     private String thumbnailUrl;
-    public Steps(JSONObject stepObj){
+
+    public Steps(JSONObject stepObj) {
         try {
-            this.id=stepObj.getInt("id");
-            this.shortDescription=stepObj.getString("shortDescription");
-            this.description=stepObj.getString("description");
-            this.videoUrl=stepObj.getString("videoURL");
-            this.thumbnailUrl=stepObj.getString("thumbnailURL");
+            this.id = stepObj.getInt("id");
+            this.shortDescription = stepObj.getString("shortDescription");
+            this.description = stepObj.getString("description");
+            this.videoUrl = stepObj.getString("videoURL");
+            this.thumbnailUrl = stepObj.getString("thumbnailURL");
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+
     public int getId() {
         return id;
     }

@@ -54,7 +54,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     private static MediaSessionCompat mMediaSession;
     private PlaybackStateCompat.Builder mStateBuilder;
     protected static int index = 0;
-    private ArrayList<Steps>stepsArrayList;
+    private ArrayList<Steps> stepsArrayList;
 
     public StepsDetailActivityFragment() {
 
@@ -76,7 +76,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         }
         getActivity().setTitle(stepsArrayList.get(index).getShortDescription());
         longDescription.setText(stepsArrayList.get(index).getDescription());
-        if(getResources().getConfiguration().orientation== Configuration.ORIENTATION_LANDSCAPE && !isTablet){
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE && !isTablet) {
             fullScreenVideo();
             mSimpleExoPlayerView.getLayoutParams().height = ViewGroup.LayoutParams.MATCH_PARENT;
             longDescription.setVisibility(View.GONE);
@@ -86,6 +86,15 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         prev.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (index > 0) {
+                    index--;
+                    getActivity().setTitle(stepsArrayList.get(index).getShortDescription());
+                    longDescription.setText(stepsArrayList.get(index).getDescription());
+                    initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
+                    mSimpleExoPlayer.seekTo(0);
+                    mSimpleExoPlayer.setPlayWhenReady(false);
+
+                }
 
 
             }
@@ -93,6 +102,16 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         next.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (index < stepsArrayList.size() - 1) {
+                    index++;
+                    getActivity().setTitle(stepsArrayList.get(index).getShortDescription());
+                    longDescription.setText(stepsArrayList.get(index).getDescription());
+                    initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
+                    mSimpleExoPlayer.seekTo(0);
+                    mSimpleExoPlayer.setPlayWhenReady(false);
+
+
+                }
 
             }
         });
@@ -151,6 +170,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         mSimpleExoPlayer.release();
         mSimpleExoPlayer = null;
     }
+
     @Override
     public void onPause() {
         super.onPause();

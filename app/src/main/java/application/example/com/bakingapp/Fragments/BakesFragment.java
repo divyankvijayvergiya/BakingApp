@@ -37,10 +37,9 @@ import static application.example.com.bakingapp.MainActivity.isTablet;
 
 public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemClickListener {
     private static final String TAG = BakesFragment.class.getSimpleName();
-    public static  ArrayList<Bake> bakeArrayList = new ArrayList<>();
+    public static ArrayList<Bake> bakeArrayList = new ArrayList<>();
     private RecyclerView recyclerView;
     private MainBakeAdapter mAdapter;
-
 
 
     public BakesFragment() {
@@ -58,8 +57,8 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
 
     @Override
     public void onListItemClick(int clickItemIndex) {
-        Intent intent=new Intent(getActivity(),StepsIngredientsActivity.class);
-        intent.putExtra("items",clickItemIndex);
+        Intent intent = new Intent(getActivity(), StepsIngredientsActivity.class);
+        intent.putExtra("items", clickItemIndex);
         startActivity(intent);
 
 
@@ -84,6 +83,7 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
     public class FetchBakingTask extends AsyncTask<Void, Void, ArrayList<Bake>> {
         public String bakingInfoUrl = "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
         private ProgressDialog dialog;
+
         public FetchBakingTask(Activity activity) {
             dialog = new ProgressDialog(activity);
 
@@ -97,7 +97,6 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
 
         @Override
         protected ArrayList<Bake> doInBackground(Void... params) {
-
 
 
             try {
@@ -128,10 +127,8 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
             dialog.dismiss();
 
             setData(bakes);
-            bakeArrayList=bakes;
+            bakeArrayList = bakes;
             super.onPostExecute(bakes);
-
-
 
 
         }
