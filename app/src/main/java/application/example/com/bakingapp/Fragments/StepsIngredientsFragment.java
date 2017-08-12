@@ -34,6 +34,7 @@ public class StepsIngredientsFragment extends Fragment implements StepsAdapter.L
     private IngredientsAdapter mIngredientsAdapter;
     public static ArrayList<Steps> stepsArrayList;
     private ArrayList<Ingredients> ingredientsArrayList;
+
     private int index = 0;
 
 

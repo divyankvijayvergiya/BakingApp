@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 
 import application.example.com.bakingapp.Fragments.StepsDetailActivityFragment;
 import application.example.com.bakingapp.Fragments.StepsIngredientsFragment;
@@ -19,6 +20,7 @@ public class StepsIngredientsActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_steps);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         if (savedInstanceState == null) {
             FragmentManager fragmentManager = getSupportFragmentManager();
             if (isTablet) {
@@ -40,5 +42,14 @@ public class StepsIngredientsActivity extends AppCompatActivity {
             }
         }
 
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == android.R.id.home) {
+            onBackPressed();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

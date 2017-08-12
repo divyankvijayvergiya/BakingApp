@@ -3,4 +3,6 @@
     <string name="servings">Servings:</string>
     <string name="steps_activity">Ingredient &amp; Steps</string>
     <string name="step">Step :</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
 </resources>
