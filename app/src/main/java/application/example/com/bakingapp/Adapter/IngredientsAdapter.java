@@ -60,7 +60,7 @@ public class IngredientsAdapter extends RecyclerView.Adapter<IngredientsAdapter.
         public IngredientsViewHolder(View itemView) {
             super(itemView);
             ingredientsTextView = (TextView) itemView.findViewById(R.id.ingredients);
-            quantityTextView = (TextView) itemView.findViewById(R.id.quantity_number);
+            quantityTextView = (TextView) itemView.findViewById(R.id.quantity);
             measure = (TextView) itemView.findViewById(R.id.measure);
 
         }

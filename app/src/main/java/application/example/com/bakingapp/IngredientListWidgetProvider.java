@@ -3,6 +3,7 @@ package application.example.com.bakingapp;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.widget.RemoteViews;
@@ -21,6 +22,8 @@ public class IngredientListWidgetProvider extends AppWidgetProvider {
         Intent mainIntent=new Intent(context,MainActivity.class);
         PendingIntent mainPendingIntent=PendingIntent.getActivity(context,0,mainIntent,0);
         views.setOnClickPendingIntent(R.id.widgetTitleLabel,mainPendingIntent);
+        Intent intent=new Intent(context,ListWidgetService.class);
+        views.setRemoteAdapter(R.id.widgetListView, intent);
         Intent stepsIntent=new Intent(context , StepsIngredientsActivity.class);
         PendingIntent stepsPendingIntent=PendingIntent.getActivity(context , 0 , stepsIntent ,PendingIntent.FLAG_UPDATE_CURRENT);
         views.setOnClickPendingIntent(R.id.widgetListView , stepsPendingIntent);
@@ -45,6 +48,16 @@ public class IngredientListWidgetProvider extends AppWidgetProvider {
     @Override
     public void onDisabled(Context context) {
         // Enter relevant functionality for when the last widget is disabled
+    }
+    @Override
+    public void onReceive(final Context context, Intent intent) {
+        final String action = intent.getAction();
+        if (action.equals(AppWidgetManager.ACTION_APPWIDGET_UPDATE)) {
+            AppWidgetManager mgr = AppWidgetManager.getInstance(context);
+            ComponentName cn = new ComponentName(context, IngredientListWidgetProvider.class);
+            mgr.notifyAppWidgetViewDataChanged(mgr.getAppWidgetIds(cn), R.id.widgetListView);
+        }
+        super.onReceive(context, intent);
     }
 }
 
