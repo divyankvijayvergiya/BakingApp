@@ -77,7 +77,7 @@ public class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
 
         Intent intent = new Intent();
         intent.putExtra("item", position);
-        remoteViews.setOnClickFillInIntent(R.id.bacckground, intent);
+        remoteViews.setOnClickFillInIntent(R.id.bb, intent);
         return remoteViews;
 
     }
