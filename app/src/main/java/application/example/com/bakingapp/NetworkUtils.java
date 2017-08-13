@@ -38,7 +38,7 @@ public class NetworkUtils {
             }
         } catch (IOException e) {
 
-            Log.e(TAG, "problem retrieving the earthquake json results", e);
+            Log.e(TAG, "problem retrieving the baking app json results", e);
         } finally {
             if (urlConnection != null) {
                 urlConnection.disconnect();
