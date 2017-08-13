@@ -26,7 +26,7 @@ public class IngredientListWidgetProvider extends AppWidgetProvider {
         views.setRemoteAdapter(R.id.widgetListView, intent);
         Intent stepsIntent=new Intent(context , StepsIngredientsActivity.class);
         PendingIntent stepsPendingIntent=PendingIntent.getActivity(context , 0 , stepsIntent ,PendingIntent.FLAG_UPDATE_CURRENT);
-        views.setOnClickPendingIntent(R.id.widgetListView , stepsPendingIntent);
+        views.setPendingIntentTemplate(R.id.widgetListView , stepsPendingIntent);
 
         // Instruct the widget manager to update the widget
         appWidgetManager.updateAppWidget(appWidgetId, views);

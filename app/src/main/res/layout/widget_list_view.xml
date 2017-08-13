@@ -26,7 +26,6 @@
             android:layout_marginTop="50dp"
             android:textSize="25dp"
             android:layout_marginLeft="5dp"
-
             android:textColor="#417AFE"/>
         <TextView
             android:id="@+id/servings"
