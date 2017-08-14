@@ -67,7 +67,9 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         mSimpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.player_view);
         initializeMediaSession();
 
+
         initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
+
         if (!isTablet) {
             index = getActivity().getIntent().getExtras().getInt("item");
 
@@ -102,7 +104,6 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
                     mSimpleExoPlayer.seekTo(0);
                     mSimpleExoPlayer.setPlayWhenReady(false);
                     initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
-
 
 
                 }
@@ -161,8 +162,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
             mSimpleExoPlayer.prepare(mediaSource);
             mSimpleExoPlayer.setPlayWhenReady(true);
 
-        }
-        else {
+        } else {
             TrackSelector trackSelector = new DefaultTrackSelector();
             LoadControl loadControl = new DefaultLoadControl();
             mSimpleExoPlayer = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector, loadControl);
@@ -205,6 +205,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
 
         mMediaSession.setActive(false);
     }
+
     @Override
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
         if ((playbackState == ExoPlayer.STATE_READY) && playWhenReady) {
@@ -237,6 +238,12 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
 
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+        super.onSaveInstanceState(outState);
+        initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
+
+    }
 
     @Override
     public void onTimelineChanged(Timeline timeline, Object manifest) {
@@ -252,7 +259,6 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     public void onLoadingChanged(boolean isLoading) {
 
     }
-
 
 
     @Override
