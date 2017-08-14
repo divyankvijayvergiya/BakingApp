@@ -68,13 +68,11 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         next = (Button) rootView.findViewById(R.id.next_button);
         if(savedInstanceState!=null){
 
-
-
-            currentPosition=mSimpleExoPlayer.getCurrentPosition();
-
-
             currentPosition=savedInstanceState.getLong("item");
-            mSimpleExoPlayer.addListener(listener);
+
+            mSimpleExoPlayer.seekTo(currentPosition);
+
+
         }
 
         mSimpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.player_view);
