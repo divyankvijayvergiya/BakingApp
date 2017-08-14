@@ -21,11 +21,15 @@ import application.example.com.bakingapp.Model.Bake;
 
 import static application.example.com.bakingapp.Fragments.BakesFragment.bakeArrayList;
 
-public class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
-    public static final String TAG = ListRemoteViewsFactory.class.getSimpleName();
+/**
+ * Created by Dell on 15-08-2017.
+ */
+
+public class LisstRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
+    public static final String TAG = LisstRemoteViewsFactory.class.getSimpleName();
     Context mContext;
 
-    public ListRemoteViewsFactory(Context applicationContext) {
+    public LisstRemoteViewsFactory(Context applicationContext) {
         mContext = applicationContext;
 
     }
@@ -38,7 +42,7 @@ public class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
     @Override
     public void onDataSetChanged() {
         try {
-            new FetchBakingTask().execute().get();
+            new LisstRemoteViewsFactory.FetchBakingTask().execute().get();
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -147,3 +151,5 @@ public class ListRemoteViewsFactory implements RemoteViewsService.RemoteViewsFac
     }
 
 }
+
+
