@@ -193,8 +193,8 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     public void onPause() {
         super.onPause();
         mSimpleExoPlayer.setPlayWhenReady(false);
-        releasePlayer();
         currentPosition=mSimpleExoPlayer.getCurrentPosition();
+        releasePlayer();
         mMediaSession.setActive(false);
     }
 
