@@ -51,6 +51,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     private PlaybackStateCompat.Builder mStateBuilder;
     protected static int index = 0;
     private long currentPosition=0;
+    boolean isPreparing;
 
 
     public StepsDetailActivityFragment() {
@@ -65,6 +66,12 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         prev = (Button) rootView.findViewById(R.id.prev_button);
         next = (Button) rootView.findViewById(R.id.next_button);
         if(savedInstanceState!=null){
+            
+
+
+            currentPosition=mSimpleExoPlayer.getCurrentPosition();
+
+
             currentPosition=savedInstanceState.getLong("item");
         }
 
