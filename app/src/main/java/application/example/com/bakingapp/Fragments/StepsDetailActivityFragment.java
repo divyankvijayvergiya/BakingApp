@@ -66,7 +66,13 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         longDescription = (TextView) rootView.findViewById(R.id.long_desrciption);
         prev = (Button) rootView.findViewById(R.id.prev_button);
         next = (Button) rootView.findViewById(R.id.next_button);
+
+
+        mSimpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.player_view);
+        initializeMediaSession();
         if(savedInstanceState!=null){
+            mSimpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.player_view);
+            initializeMediaSession();
 
             currentPosition=savedInstanceState.getLong("item");
 
@@ -74,9 +80,6 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
 
 
         }
-
-        mSimpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.player_view);
-        initializeMediaSession();
 
 
         initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
