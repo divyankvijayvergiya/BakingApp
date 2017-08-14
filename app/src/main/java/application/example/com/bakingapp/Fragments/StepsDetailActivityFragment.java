@@ -71,9 +71,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         mSimpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.player_view);
         initializeMediaSession();
         if(savedInstanceState!=null){
-            mSimpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.player_view);
-            initializeMediaSession();
-
+           
             currentPosition=savedInstanceState.getLong("item");
 
             mSimpleExoPlayer.seekTo(currentPosition);
