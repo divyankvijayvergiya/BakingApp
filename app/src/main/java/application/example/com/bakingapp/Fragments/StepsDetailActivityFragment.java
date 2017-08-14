@@ -66,9 +66,11 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
 
         mSimpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.player_view);
         initializeMediaSession();
+
         initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
         if (!isTablet) {
             index = getActivity().getIntent().getExtras().getInt("item");
+
         }
         getActivity().setTitle(stepsArrayList.get(index).getShortDescription());
         longDescription.setText(stepsArrayList.get(index).getDescription());
@@ -81,9 +83,9 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
                     index--;
                     getActivity().setTitle(stepsArrayList.get(index).getShortDescription());
                     longDescription.setText(stepsArrayList.get(index).getDescription());
-                    initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
                     mSimpleExoPlayer.seekTo(0);
                     mSimpleExoPlayer.setPlayWhenReady(false);
+                    initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
 
                 }
 
@@ -97,9 +99,10 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
                     index++;
                     getActivity().setTitle(stepsArrayList.get(index).getShortDescription());
                     longDescription.setText(stepsArrayList.get(index).getDescription());
-                    initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
                     mSimpleExoPlayer.seekTo(0);
                     mSimpleExoPlayer.setPlayWhenReady(false);
+                    initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
+
 
 
                 }
@@ -159,6 +162,19 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
             mSimpleExoPlayer.setPlayWhenReady(true);
 
         }
+        else {
+            TrackSelector trackSelector = new DefaultTrackSelector();
+            LoadControl loadControl = new DefaultLoadControl();
+            mSimpleExoPlayer = ExoPlayerFactory.newSimpleInstance(getContext(), trackSelector, loadControl);
+            mSimpleExoPlayerView.setPlayer(mSimpleExoPlayer);
+            mSimpleExoPlayer.addListener(this);
+            String userAgent = Util.getUserAgent(getContext(), "StepsDetailActivityFragment");
+            MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(getContext(), userAgent),
+                    new DefaultExtractorsFactory(), null, null);
+            mSimpleExoPlayer.prepare(mediaSource);
+            mSimpleExoPlayer.setPlayWhenReady(true);
+
+        }
 
 
     }
@@ -173,6 +189,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     public void onPause() {
         super.onPause();
         mSimpleExoPlayer.setPlayWhenReady(false);
+        releasePlayer();
         mMediaSession.setActive(false);
     }
 
@@ -185,7 +202,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     @Override
     public void onDestroy() {
         super.onDestroy();
-        releasePlayer();
+
         mMediaSession.setActive(false);
     }
     @Override

@@ -25,6 +25,8 @@ import java.util.ArrayList;
 
 import application.example.com.bakingapp.Adapter.MainBakeAdapter;
 import application.example.com.bakingapp.Model.Bake;
+import application.example.com.bakingapp.Model.Ingredients;
+import application.example.com.bakingapp.Model.Steps;
 import application.example.com.bakingapp.NetworkUtils;
 import application.example.com.bakingapp.R;
 import application.example.com.bakingapp.StepsIngredientsActivity;
@@ -40,9 +42,15 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
     public static ArrayList<Bake> bakeArrayList = new ArrayList<>();
     private RecyclerView recyclerView;
     private MainBakeAdapter mAdapter;
+    private ArrayList<Steps> stepsArrayList;
+    private ArrayList<Ingredients>ingredientsArrayList;
+    Bake bake;
+    Steps steps;
+    Ingredients ingredients;
 
 
     public BakesFragment() {
+
 
     }
 
@@ -57,12 +65,14 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
 
     @Override
     public void onListItemClick(int clickItemIndex) {
+
         Intent intent = new Intent(getActivity(), StepsIngredientsActivity.class);
         intent.putExtra("items", clickItemIndex);
         startActivity(intent);
 
 
     }
+
 
     public void setData(ArrayList<Bake> bakeArrayList) {
         recyclerView = (RecyclerView) getActivity().findViewById(R.id.recycler_bake_list);

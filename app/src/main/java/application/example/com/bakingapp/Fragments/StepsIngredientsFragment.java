@@ -66,6 +66,7 @@ public class StepsIngredientsFragment extends Fragment implements StepsAdapter.L
     @Override
     public void onItemClick(int clickItemIndex) {
         if (!isTablet) {
+
             Intent intent = new Intent(getActivity(), StepsDetailActivity.class);
             intent.putExtra("item", clickItemIndex);
             startActivity(intent);
