@@ -70,8 +70,10 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
 
         mSimpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.player_view);
         initializeMediaSession();
+        initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
+
         if(savedInstanceState!=null){
-           
+
             currentPosition=savedInstanceState.getLong("item");
 
             mSimpleExoPlayer.seekTo(currentPosition);
@@ -80,7 +82,6 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         }
 
 
-        initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
 
         if (!isTablet) {
             index = getActivity().getIntent().getExtras().getInt("item");
