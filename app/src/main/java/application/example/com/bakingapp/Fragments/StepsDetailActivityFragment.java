@@ -50,6 +50,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     private static MediaSessionCompat mMediaSession;
     private PlaybackStateCompat.Builder mStateBuilder;
     protected static int index = 0;
+    private long currentPosition=0;
 
 
     public StepsDetailActivityFragment() {
@@ -63,6 +64,9 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         longDescription = (TextView) rootView.findViewById(R.id.long_desrciption);
         prev = (Button) rootView.findViewById(R.id.prev_button);
         next = (Button) rootView.findViewById(R.id.next_button);
+        if(savedInstanceState!=null){
+            currentPosition=savedInstanceState.getLong("item");
+        }
 
         mSimpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.player_view);
         initializeMediaSession();
@@ -190,6 +194,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         super.onPause();
         mSimpleExoPlayer.setPlayWhenReady(false);
         releasePlayer();
+        currentPosition=mSimpleExoPlayer.getCurrentPosition();
         mMediaSession.setActive(false);
     }
 
@@ -241,7 +246,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
+        outState.putLong("item",currentPosition);
 
     }
 
