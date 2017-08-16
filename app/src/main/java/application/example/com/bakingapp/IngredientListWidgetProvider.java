@@ -19,7 +19,7 @@ public class IngredientListWidgetProvider extends AppWidgetProvider {
         // Construct the RemoteViews object
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.ingredient_stack_widget_provider);
 
-        Intent intent = new Intent(context, LisstRemoteViewsFactory.class);
+        Intent intent = new Intent(context, ListWidgetService.class);
         views.setRemoteAdapter(R.id.widget_stack_view, intent);
 
         Intent viewIntent = new Intent(context, StepsIngredientsActivity.class);
