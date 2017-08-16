@@ -2,8 +2,8 @@ package application.example.com.bakingapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 
 import application.example.com.bakingapp.Model.Bake;
+import application.example.com.bakingapp.Model.Ingredients;
 
 import static application.example.com.bakingapp.Fragments.BakesFragment.bakeArrayList;
 
@@ -25,19 +26,32 @@ import static application.example.com.bakingapp.Fragments.BakesFragment.bakeArra
  * Created by Dell on 15-08-2017.
  */
 
-public class LisstRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
+ public class LisstRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     public static final String TAG = LisstRemoteViewsFactory.class.getSimpleName();
     Context mContext;
 
-    public LisstRemoteViewsFactory(Context applicationContext) {
+    public LisstRemoteViewsFactory(Context applicationContext,Intent intent) {
         mContext = applicationContext;
 
     }
 
     @Override
     public void onCreate() {
+    }
+    @Override
+    public void onDestroy() {
+        bakeArrayList.clear();
 
     }
+    @Override
+    public int getCount() {
+        if (bakeArrayList==null){
+            return 0;
+        }
+        return bakeArrayList.size();
+    }
+
+
 
     @Override
     public void onDataSetChanged() {
@@ -52,36 +66,25 @@ public class LisstRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
 
     }
 
-    @Override
-    public void onDestroy() {
 
-    }
 
-    @Override
-    public int getCount() {
-        return bakeArrayList.size();
-    }
+
 
     @Override
     public RemoteViews getViewAt(int position) {
-        RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.widget_list_view);
-        try {
-            remoteViews.setImageViewBitmap(R.id.icon, BitmapFactory.decodeStream(new URL(bakeArrayList.get(position).getImages()).openConnection().getInputStream()));
-        } catch (IOException e) {
+        RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.widget_list_item);
+       Bake bakes=bakeArrayList.get(position);
+        remoteViews.setTextViewText(R.id.widget_item_recipe_name,bakes.getName());
+        String ingredients="";
+        for (Ingredients ingredient : bakes.getIngredientsArrayList()){
+            ingredients += " - " + ingredient.getIngredient() + "\n";
         }
-        remoteViews.setTextViewText(R.id.name, bakeArrayList.get(position).getName());
-        remoteViews.setTextViewText(R.id.servings, mContext.getString(R.string.servings) + " " + bakeArrayList.get(position).getServings());
-        for (int i = 0; i < bakeArrayList.get(position).getIngredientsArrayList().size(); i++) {
-            RemoteViews ing = new RemoteViews(mContext.getPackageName(), R.layout.activity_ingredient_item);
-            ing.setTextViewText(R.id.ingredients, bakeArrayList.get(position).getIngredientsArrayList().get(i).getIngredient());
-            ing.setTextViewText(R.id.measure, bakeArrayList.get(position).getIngredientsArrayList().get(i).getMeasure());
-            ing.setTextViewText(R.id.quantity, bakeArrayList.get(position).getIngredientsArrayList().get(i).getQuantity() + "");
-            remoteViews.addView(R.id.ingerdient_list, ing);
-        }
-
-        Intent intent = new Intent();
-        intent.putExtra("item", position);
-        remoteViews.setOnClickFillInIntent(R.id.bb, intent);
+        remoteViews.setTextViewText(R.id.widget_item_ingredients,ingredients);
+        Bundle extras=new Bundle();
+        extras.putParcelable(mContext.getString(R.string.extra_recipe),bakes);
+        Intent fillIntent=new Intent();
+        fillIntent.putExtras(extras);
+        remoteViews.setOnClickFillInIntent(R.id.recipe_widget_item,fillIntent);
         return remoteViews;
 
     }
@@ -93,7 +96,7 @@ public class LisstRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public int getViewTypeCount() {
-        return 2;
+        return 1;
     }
 
     @Override
