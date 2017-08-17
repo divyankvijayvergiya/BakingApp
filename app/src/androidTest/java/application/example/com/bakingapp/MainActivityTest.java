@@ -57,22 +57,23 @@ public class MainActivityTest {
 
         @Test
         public void mainActivityTest() {
-        ViewInteraction recyclerView = onView(
-                allOf(withId(R.id.recycler_bake_list)
-                        ,
-                        isDisplayed()));
-        recyclerView.perform(actionOnItemAtPosition(1, click()));
             ViewInteraction textView = onView(
                     allOf(withId(R.id.main_name), withText("Nutella Pie"),
                             childAtPosition(
                                     childAtPosition(
                                             withId(R.id.recycler_bake_list),
-                                            0),
-                                    0),
+                                            1),
+                                    1),
                             isDisplayed()));
             textView.check(matches(withText("Nutella Pie")));
 
 
+
+            ViewInteraction recyclerView = onView(
+                allOf(withId(R.id.recycler_bake_list)
+                        ,
+                        isDisplayed()));
+        recyclerView.perform(actionOnItemAtPosition(1, click()));
 
 
 
