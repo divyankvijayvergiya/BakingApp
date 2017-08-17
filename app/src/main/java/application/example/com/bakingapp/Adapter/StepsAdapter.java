@@ -36,7 +36,7 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepViewHold
     public StepsAdapter.StepViewHolder onCreateViewHolder(ViewGroup parent, int viewType)
     {
         Context context=parent.getContext();
-        int layoutIdForListItem= R.layout.list_item;
+        int layoutIdForListItem= R.layout.steps_item;
         boolean shouldAttachToParentImmediately =false;
         LayoutInflater layoutInflater=LayoutInflater.from(context);
         View view =layoutInflater.inflate(layoutIdForListItem , parent , shouldAttachToParentImmediately);
@@ -68,9 +68,9 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepViewHold
 
         public StepViewHolder(View itemView) {
             super(itemView);
-            icon = (ImageView) itemView.findViewById(R.id.main_image);
-            shortDescription= (TextView) itemView.findViewById(R.id.main_name);
-            id= (TextView) itemView.findViewById(R.id.main_servings);
+            icon = (ImageView) itemView.findViewById(R.id.image);
+            shortDescription= (TextView) itemView.findViewById(R.id.short_description);
+            id= (TextView) itemView.findViewById(R.id.id);
             itemView.setOnClickListener(this);
 
 
