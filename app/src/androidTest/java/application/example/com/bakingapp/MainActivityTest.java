@@ -62,8 +62,8 @@ public class MainActivityTest {
                             childAtPosition(
                                     childAtPosition(
                                             withId(R.id.recycler_bake_list),
-                                            1),
-                                    1),
+                                            0),
+                                    0),
                             isDisplayed()));
             textView.check(matches(withText("Nutella Pie")));
 
@@ -73,7 +73,7 @@ public class MainActivityTest {
                 allOf(withId(R.id.recycler_bake_list)
                         ,
                         isDisplayed()));
-        recyclerView.perform(actionOnItemAtPosition(1, click()));
+        recyclerView.perform(actionOnItemAtPosition(0, click()));
 
 
 
