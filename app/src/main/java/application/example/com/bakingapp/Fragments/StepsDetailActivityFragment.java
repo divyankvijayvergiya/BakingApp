@@ -201,6 +201,13 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     }}
 
     @Override
+    public void onResume() {
+        super.onResume();
+        initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
+        mSimpleExoPlayer.seekTo(currentPosition);
+    }
+
+    @Override
     public void onPause() {
         super.onPause();
         mSimpleExoPlayer.setPlayWhenReady(false);
@@ -209,11 +216,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         mMediaSession.setActive(false);
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        
-    }
+
 
     @Override
     public void onDestroy() {
