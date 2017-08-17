@@ -194,25 +194,11 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     }
 
     private void releasePlayer() {
-        if (mSimpleExoPlayer != null) {
-            mSimpleExoPlayer.stop();
-            mSimpleExoPlayer.release();
-            mSimpleExoPlayer = null;
-        }
-    }
-
-    @Override
-    public void onStart() {
-        super.onStart();
-        initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
-
-    }
-    @Override
-    public void onResume() {
-        super.onResume();
-        initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
-
-    }
+        if(mSimpleExoPlayer!=null){
+        mSimpleExoPlayer.stop();
+        mSimpleExoPlayer.release();
+        mSimpleExoPlayer = null;
+    }}
 
     @Override
     public void onPause() {
@@ -224,19 +210,14 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     }
 
     @Override
-    public void onStop() {
-        super.onStop();
-
-
-        releasePlayer();
-        mMediaSession.setActive(false);
-
+    public void onResume() {
+        super.onResume();
+        
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        releasePlayer();
 
         mMediaSession.setActive(false);
     }
