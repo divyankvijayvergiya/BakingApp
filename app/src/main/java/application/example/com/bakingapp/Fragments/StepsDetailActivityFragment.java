@@ -66,6 +66,12 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         longDescription = (TextView) rootView.findViewById(R.id.long_desrciption);
         prev = (Button) rootView.findViewById(R.id.prev_button);
         next = (Button) rootView.findViewById(R.id.next_button);
+        if (!isTablet) {
+            index = getActivity().getIntent().getExtras().getInt("item");
+
+        }
+        getActivity().setTitle(stepsArrayList.get(index).getShortDescription());
+        longDescription.setText(stepsArrayList.get(index).getDescription());
 
 
         mSimpleExoPlayerView = (SimpleExoPlayerView) rootView.findViewById(R.id.player_view);
@@ -83,12 +89,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
 
 
 
-        if (!isTablet) {
-            index = getActivity().getIntent().getExtras().getInt("item");
 
-        }
-        getActivity().setTitle(stepsArrayList.get(index).getShortDescription());
-        longDescription.setText(stepsArrayList.get(index).getDescription());
 
 
         prev.setOnClickListener(new View.OnClickListener() {
@@ -193,9 +194,24 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     }
 
     private void releasePlayer() {
-        mSimpleExoPlayer.stop();
-        mSimpleExoPlayer.release();
-        mSimpleExoPlayer = null;
+        if (mSimpleExoPlayer != null) {
+            mSimpleExoPlayer.stop();
+            mSimpleExoPlayer.release();
+            mSimpleExoPlayer = null;
+        }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
+
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
+
     }
 
     @Override
@@ -208,14 +224,19 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     }
 
     @Override
-    public void onResume() {
-        super.onResume();
-        mMediaSession.setActive(true);
+    public void onStop() {
+        super.onStop();
+
+
+        releasePlayer();
+        mMediaSession.setActive(false);
+
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        releasePlayer();
 
         mMediaSession.setActive(false);
     }

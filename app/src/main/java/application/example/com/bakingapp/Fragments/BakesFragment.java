@@ -2,7 +2,10 @@ package application.example.com.bakingapp.Fragments;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -14,6 +17,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -52,9 +56,18 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.main_fragment, container, false);
-        new FetchBakingTask(getActivity()).execute();
-        return rootView;
+        ConnectivityManager cm =
+                (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+        final NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
+        if (activeNetwork != null &&
+                activeNetwork.isConnectedOrConnecting()) {
+            new FetchBakingTask(getActivity()).execute();
 
+
+        }else {
+            Toast.makeText(getContext(), getString(R.string.internet), Toast.LENGTH_SHORT).show();
+        }
+        return rootView;
     }
 
     @Override
@@ -128,6 +141,10 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
 
         @Override
         protected void onPostExecute(ArrayList<Bake> bakes) {
+            if(bakes==null||bakes.isEmpty()){
+                dialog.dismiss();
+                Toast.makeText(getContext(),"Error in connection",Toast.LENGTH_SHORT).show();
+            }
             dialog.dismiss();
 
             setData(bakes);
