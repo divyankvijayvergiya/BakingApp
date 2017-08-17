@@ -50,7 +50,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     private static MediaSessionCompat mMediaSession;
     private PlaybackStateCompat.Builder mStateBuilder;
     protected static int index = 0;
-    private long currentPosition=0;
+    private long currentPosition = 0;
     boolean isPreparing;
     ExoPlayer.EventListener listener;
 
@@ -78,18 +78,14 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
         initializeMediaSession();
         initializePlayer(Uri.parse(stepsArrayList.get(index).getVideoUrl()));
 
-        if(savedInstanceState!=null){
+        if (savedInstanceState != null) {
 
-            currentPosition=savedInstanceState.getLong("item");
+            currentPosition = savedInstanceState.getLong("item");
 
             mSimpleExoPlayer.seekTo(currentPosition);
 
 
         }
-
-
-
-
 
 
         prev.setOnClickListener(new View.OnClickListener() {
@@ -194,11 +190,12 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     }
 
     private void releasePlayer() {
-        if(mSimpleExoPlayer!=null){
-        mSimpleExoPlayer.stop();
-        mSimpleExoPlayer.release();
-        mSimpleExoPlayer = null;
-    }}
+        if (mSimpleExoPlayer != null) {
+            mSimpleExoPlayer.stop();
+            mSimpleExoPlayer.release();
+            mSimpleExoPlayer = null;
+        }
+    }
 
     @Override
     public void onResume() {
@@ -211,11 +208,10 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     public void onPause() {
         super.onPause();
         mSimpleExoPlayer.setPlayWhenReady(false);
-        currentPosition=mSimpleExoPlayer.getCurrentPosition();
+        currentPosition = mSimpleExoPlayer.getCurrentPosition();
         releasePlayer();
         mMediaSession.setActive(false);
     }
-
 
 
     @Override
@@ -260,7 +256,7 @@ public class StepsDetailActivityFragment extends Fragment implements ExoPlayer.E
     @Override
     public void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putLong("item",currentPosition);
+        outState.putLong("item", currentPosition);
 
     }
 

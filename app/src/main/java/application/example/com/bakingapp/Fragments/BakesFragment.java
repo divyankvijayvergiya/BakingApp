@@ -46,7 +46,6 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
     private MainBakeAdapter mAdapter;
 
 
-
     public BakesFragment() {
 
 
@@ -64,7 +63,7 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
             new FetchBakingTask(getActivity()).execute();
 
 
-        }else {
+        } else {
             Toast.makeText(getContext(), getString(R.string.internet), Toast.LENGTH_SHORT).show();
         }
         return rootView;
@@ -141,9 +140,9 @@ public class BakesFragment extends Fragment implements MainBakeAdapter.ListItemC
 
         @Override
         protected void onPostExecute(ArrayList<Bake> bakes) {
-            if(bakes==null||bakes.isEmpty()){
+            if (bakes == null || bakes.isEmpty()) {
                 dialog.dismiss();
-                Toast.makeText(getContext(),"Error in connection",Toast.LENGTH_SHORT).show();
+                Toast.makeText(getContext(), "Error in connection", Toast.LENGTH_SHORT).show();
             }
             dialog.dismiss();
 

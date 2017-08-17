@@ -1,6 +1,7 @@
 package application.example.com.bakingapp;
 
 import android.support.test.espresso.ViewInteraction;
+import android.support.test.espresso.contrib.RecyclerViewActions;
 import android.support.test.filters.LargeTest;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
@@ -52,32 +53,28 @@ public class MainActivityTest {
             }
         };
     }
+
     public static RecyclerViewMatcher withRecyclerView(final int recyclerViewId) {
         return new RecyclerViewMatcher(recyclerViewId);
     }
 
 
-        @Test
-        public void mainActivityTest() {
-            
-
-            onView(withRecyclerView(R.id.recycler_bake_list)
-                    .atPositionOnView(0, R.id.main_name))
-                    .check(matches(withText("Nutella Pie")));
+    @Test
+    public void mainActivityTest() {
 
 
-            ViewInteraction recyclerView = onView(
+        onView(withRecyclerView(R.id.recycler_bake_list)
+                .atPositionOnView(0, R.id.main_name))
+                .check(matches(withText("Nutella Pie")));
+        onView(withId(R.id.recycler_bake_list)).perform(RecyclerViewActions.scrollToPosition(4));
+
+
+        ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.recycler_bake_list)
                         ,
                         isDisplayed()));
         recyclerView.perform(actionOnItemAtPosition(0, click()));
 
 
-
-
-
-
-
-
-        }
+    }
 }

@@ -26,11 +26,11 @@ import static application.example.com.bakingapp.Fragments.BakesFragment.bakeArra
  * Created by Dell on 15-08-2017.
  */
 
- public class LisstRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
+public class LisstRemoteViewsFactory implements RemoteViewsService.RemoteViewsFactory {
     public static final String TAG = LisstRemoteViewsFactory.class.getSimpleName();
     Context mContext;
 
-    public LisstRemoteViewsFactory(Context applicationContext,Intent intent) {
+    public LisstRemoteViewsFactory(Context applicationContext, Intent intent) {
         mContext = applicationContext;
 
     }
@@ -38,19 +38,20 @@ import static application.example.com.bakingapp.Fragments.BakesFragment.bakeArra
     @Override
     public void onCreate() {
     }
+
     @Override
     public void onDestroy() {
         bakeArrayList.clear();
 
     }
+
     @Override
     public int getCount() {
-        if (bakeArrayList==null){
+        if (bakeArrayList == null) {
             return 0;
         }
         return bakeArrayList.size();
     }
-
 
 
     @Override
@@ -67,24 +68,21 @@ import static application.example.com.bakingapp.Fragments.BakesFragment.bakeArra
     }
 
 
-
-
-
     @Override
     public RemoteViews getViewAt(int position) {
         RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.widget_list_item);
-       Bake bakes=bakeArrayList.get(position);
-        remoteViews.setTextViewText(R.id.widget_item_recipe_name,bakes.getName());
-        String ingredients="";
-        for (Ingredients ingredient : bakes.getIngredientsArrayList()){
+        Bake bakes = bakeArrayList.get(position);
+        remoteViews.setTextViewText(R.id.widget_item_recipe_name, bakes.getName());
+        String ingredients = "";
+        for (Ingredients ingredient : bakes.getIngredientsArrayList()) {
             ingredients += " - " + ingredient.getIngredient() + "\n";
         }
-        remoteViews.setTextViewText(R.id.widget_item_ingredients,ingredients);
-        Bundle extras=new Bundle();
-        extras.putParcelable(mContext.getString(R.string.extra_recipe),bakes);
-        Intent fillIntent=new Intent();
+        remoteViews.setTextViewText(R.id.widget_item_ingredients, ingredients);
+        Bundle extras = new Bundle();
+        extras.putParcelable(mContext.getString(R.string.extra_recipe), bakes);
+        Intent fillIntent = new Intent();
         fillIntent.putExtras(extras);
-        remoteViews.setOnClickFillInIntent(R.id.recipe_widget_item,fillIntent);
+        remoteViews.setOnClickFillInIntent(R.id.recipe_widget_item, fillIntent);
         return remoteViews;
 
     }
