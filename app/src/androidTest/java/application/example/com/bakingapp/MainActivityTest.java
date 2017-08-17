@@ -22,6 +22,7 @@ import static android.support.test.espresso.contrib.RecyclerViewActions.actionOn
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
+import android.support.test.espresso.contrib.RecyclerViewActions;
 import static org.hamcrest.Matchers.allOf;
 
 /**
@@ -57,17 +58,9 @@ public class MainActivityTest {
 
         @Test
         public void mainActivityTest() {
-            ViewInteraction textView = onView(
-                    allOf(withId(R.id.main_name), withText("Nutella Pie"),
-                            childAtPosition(
-                                    childAtPosition(
-                                            withId(R.id.recycler_bake_list),
-                                            0),
-                                    0),
-                            isDisplayed()));
-            textView.check(matches(withText("Nutella Pie")));
-
-
+            onView(withRecyclerView(R.id.recycler_bake_list)
+                    .atPositionOnView(0, R.id.main_name))
+                    .check(matches(withText("Nutella Pie")));
 
             ViewInteraction recyclerView = onView(
                 allOf(withId(R.id.recycler_bake_list)
